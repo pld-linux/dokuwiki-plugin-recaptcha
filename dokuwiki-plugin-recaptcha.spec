@@ -10,6 +10,7 @@ Source0:	https://fosswiki.liip.ch/download/attachments/8224780/recaptcha_v0.2.tg
 # Source0-md5:	9fc3ae744ed2a0a81872b7d36798dfb1
 URL:		http://www.dokuwiki.org/plugin:recaptcha
 Requires:	dokuwiki >= 20061106
+Requires:	php-recaptcha
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -33,12 +34,6 @@ rm -f $RPM_BUILD_ROOT%{plugindir}/info.txt
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-# force css cache refresh
-if [ -f %{dokuconf}/local.php ]; then
-	touch %{dokuconf}/local.php
-fi
-
 %files
 %defattr(644,root,root,755)
 %doc info.txt
@@ -51,5 +46,3 @@ fi
 %{plugindir}/lang/en/*.php
 %dir %{plugindir}/lang/de
 %{plugindir}/lang/de/*.php
-%dir %{plugindir}/lib
-%{plugindir}/lib/*.php
